@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="description" content="gotw game theme generator">
+<script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+  <meta charset="utf-8">
+  <title>DeadElf79's GotW Theme Generator</title>
+  <link href='https://fonts.googleapis.com/css?family=Dosis:700' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+<style id="jsbin-css">
+*{
+  font-family: 'Open Sans Condensed', sans-serif;
+}
+
+*:focus {
+    outline: 0;
+}
+
+body{
+  background:url(http://s25.postimg.org/6ojjdy37z/blackboard_backgrounds_wallpapers.jpg);
+  background-color:#333;
+  background-size:100% 100%;
+  background-position:0 0;
+  height:1000px;
+}
+
+#container{
+  margin:auto;
+  width:960px;
+  text-align:center;
+  box-shadow:0 0 15px #fff;
+  background-color:#fff;
+  height:900px;
+  top:50px;
+  position:relative;
+  border-radius:10px;
+}
+
+#site-title{
+  text-shadow:0 0 3px #bbb;
+}
+
+#site-title b{
+  color:rgb(250,137,0);
+  text-shadow:0 0 5px #dd0;
+  font-family: 'Dosis', sans-serif;
+}
+
+#site-content{
+  height:80%;
+  padding-top:10px;
+}
+
+#site-content table{
+  text-align:left;
+  width:700px;
+  margin:auto;
+  border-spacing:0px;
+}
+
+#site-content table td{
+  border-bottom: 1px solid #ccc;
+  padding:9px;
+}
+
+#gen-result-container{
+  border:3px dotted #aaa;
+  width:800px;
+  height:300px;
+  margin:auto;
+  margin-top:20px;
+  border-radius:10px;
+  padding:4px;
+}
+
+#gen-result-container .normal-button{
+  position:relative;
+  top:-50px;
+  left:322px;
+}
+
+#gen-result{
+  width:100%;
+  height:100%;
+  background-color:#333;
+  border-radius:5px;
+  text-align:left;
+}
+
+#gen-result div{
+  color:#fe0;
+  padding:5px;
+  font-family:monospace;
+  font-weight:600;
+}
+
+#theme-gen-button{
+  background:none;
+  border:3px dotted #aaa;
+  border-bottom:3px solid #aaa;
+  border-top:none;
+  border-radius:0px 0 10px 10px;
+  cursor:pointer;
+  font-size:24px;
+  background-color:white;
+  position:relative;
+  top:-3px;
+  background:linear-gradient(to bottom, #fff, #f80);
+}
+
+#footer{
+  position:relative;
+  width:960px;
+  margin:auto;
+  top:70px;
+  color:#fff;
+  text-shadow:0 0 3px;
+}
+
+.hor-line{
+  width:90%;
+  height:10px;
+  margin-top:15px;
+  margin-left:5%;
+  border-top:2px dashed rgb(250,137,0);
+}
+
+.text-super-big{
+  font-size:55px;
+  font-family: 'Dosis', sans-serif;
+}
+
+.text-big{
+  font-size:28px;
+}
+
+.text-normal{
+  font-size:20px;
+}
+
+.normal-button{
+  font-size:20px;
+  background:none;
+  border:1px solid;
+  border-radius:3px;
+  cursor:pointer;
+  margin-top:15px;
+  background-color:white;
+}
+
+.normal-button:hover{
+  background-color:rgb(250,137,0);
+}
+
+.buttoned-checkbox{
+  font-size:20px;
+  background:none;
+  border:1px solid;
+  border-radius:3px;
+  cursor:pointer;
+  margin-top:15px;
+  padding:1px;
+}
+
+.buttoned-checkbox:hover{
+  background-color:rgb(250,137,0);
+}
+
+.buttoned-checkbox input{
+  display:none;
+}
+
+.buttoned-checkbox input:checked+label{
+  background-color:rgb(250,137,0);
+}
+</style>
+</head>
+<body>
+  <div id="container">
+    <div id="site-title" class="text-super-big">
+      <b>G</b>ame <b>o</b>f <b>t</b>he <b>W</b>eek
+      <div class="text-big">Генератор тем для проектов</div>
+    </div>
+    <div class="hor-line"></div>
+    <div id="site-content">
+      <div class="text-normal">Выберите один или несколько жанров и нажмите кнопку "Генерировать!"</div>
+      <div class="text-normal">
+        <table>
+          <col width="200px">
+          <col width="200px">
+          <col width="200px">
+          <col width="200px">
+          <tr>
+            <td><input class="genre-select" type="checkbox" checked value="Аркада">Аркада</input></td>
+            <td><input class="genre-select" type="checkbox" checked value="Боевик">Боевик</input></td>
+            <td><input class="genre-select" type="checkbox" checked value="Визуальная новелла">Визуальная новелла</input></td>
+            <td><input class="genre-select" type="checkbox" checked value="Гонка">Гонка</input></td>
+          </tr>
+          <tr>
+            <td><input class="genre-select" type="checkbox" checked value="Платформер">Платформер</input></td>
+            <td><input class="genre-select" type="checkbox" checked value="Приключение">Приключение</input></td>
+            <td><input class="genre-select" type="checkbox" checked value="Ролевая игра">Ролевая игра</input></td>
+            <td><input class="genre-select" type="checkbox" checked value="Слешер">Слешер</input></td>
+          </tr>
+          <tr>
+            <td><input class="genre-select" type="checkbox" checked value="Стелс">Стелс</input></td>
+            <td><input class="genre-select" type="checkbox" checked value="Шутер">Шутер</input></td>
+            <td><input class="genre-select" type="checkbox" checked value="Файтинг">Файтинг</input></td>
+            <td><input class="genre-select" type="checkbox" checked value="Хоррор">Хоррор</input></td>
+          </tr>
+        </table>
+      </div>
+      <div>
+        <input class="normal-button" type="button" value="Выбрать всё" onclick="$.selectAllGenres();"/>
+        <input class="normal-button" type="button" value="Снять выбор" onclick="$.selectNoneGenres();"/>
+        <span class="buttoned-checkbox"><input id="mix-genres" type="checkbox"/><label for="mix-genres">Можно смешивать жанры?</label></span>
+      </div>
+      <div id="gen-result-container">
+        <div id="gen-result">
+          <div id="gen-result-text">
+            В этом поле будет отображен результат генерации, который вы сможете выделить и скопировать<br />
+            Попробуйте! ^_^
+          </div>
+        </div>
+        <input class="normal-button" type="button" value="Выделить весь текст" onclick="$.selectText();"/>
+      </div>
+      <div>
+        <input id="theme-gen-button" type="button" value="Генерировать!" onclick="$.generateGameTheme();"/>
+      </div>
+    </div>
+  </div>
+  <div id="footer">
+    Designed and coded by DeadElf79 2015
+  </div>
+<script id="jsbin-javascript">
+$.extend({
+  selectAllGenres: function(){
+    $(".genre-select").prop("checked",true);
+  },
+  selectNoneGenres: function(){
+    $(".genre-select").removeAttr("checked");
+  },
+  selectAllResults: function(){
+    var firstLine = $('#gen-result div').text().split("\n");
+    console.log(firstLine[1]);
+  },
+  selectText: function() {
+    var doc = document, text = doc.getElementById("gen-result-text"), range, selection;    
+    if (doc.body.createTextRange) {
+        range = document.body.createTextRange();
+        range.moveToElementText(text);
+        range.select();
+    } else if (window.getSelection) {
+        selection = window.getSelection();        
+        range = document.createRange();
+        range.selectNodeContents(text);
+        selection.removeAllRanges();
+        selection.addRange(range);
+    }
+  },
+  generateGameTheme: function(){
+    var resultContainer = $("#gen-result-text");
+    var checkedArray = $("#site-content table input:checkbox:checked").map(function(){
+      return $(this).val();
+    }).get();
+    var checkMixGenres = $("#mix-genres").prop("checked");
+    var genre;
+    
+    if (checkedArray.length>0){
+      if (checkMixGenres){
+        genre = chooseRandomGenre(checkedArray)+", "+
+           chooseRandomGenre(checkedArray);
+      } else {
+        genre = chooseRandomGenre(checkedArray);
+      }
+      resultContainer.html(
+                          "Название:<br/>"+
+                          "Жанр: "+genre+"<br/>"+
+                          "<br/>"+
+                          "Особенности:<br/>"+
+                          "  - <br/>"+
+                          "  - <br/>"+
+                          "  - <br/>"+
+                          "<br/>"+
+                          "Недостатки:<br/>"+
+                          "  - <br/>"+
+                          "  - <br/>"+
+                          "  - <br/>"
+                          );
+    } else {
+      resultContainer.html("Ошибка: Вы ничего не выбрали!<br />Для корректной работы генератора нужно выбрать хотя бы один жанр");
+    }
+  }
+});
+
+function chooseRandomGenre(genreArray){
+  return genreArray[(Math.floor(Math.random() * genreArray.length))];
+}
+</script>
+
+
+<script id="jsbin-source-css" type="text/css">*{
+  font-family: 'Open Sans Condensed', sans-serif;
+}
+
+*:focus {
+    outline: 0;
+}
+
+body{
+  background:url(http://s25.postimg.org/6ojjdy37z/blackboard_backgrounds_wallpapers.jpg);
+  background-color:#333;
+  background-size:100% 100%;
+  background-position:0 0;
+  height:1000px;
+}
+
+#container{
+  margin:auto;
+  width:960px;
+  text-align:center;
+  box-shadow:0 0 15px #fff;
+  background-color:#fff;
+  height:900px;
+  top:50px;
+  position:relative;
+  border-radius:10px;
+}
+
+#site-title{
+  text-shadow:0 0 3px #bbb;
+}
+
+#site-title b{
+  color:rgb(250,137,0);
+  text-shadow:0 0 5px #dd0;
+  font-family: 'Dosis', sans-serif;
+}
+
+#site-content{
+  height:80%;
+  padding-top:10px;
+}
+
+#site-content table{
+  text-align:left;
+  width:700px;
+  margin:auto;
+  border-spacing:0px;
+}
+
+#site-content table td{
+  border-bottom: 1px solid #ccc;
+  padding:9px;
+}
+
+#gen-result-container{
+  border:3px dotted #aaa;
+  width:800px;
+  height:300px;
+  margin:auto;
+  margin-top:20px;
+  border-radius:10px;
+  padding:4px;
+}
+
+#gen-result-container .normal-button{
+  position:relative;
+  top:-50px;
+  left:322px;
+}
+
+#gen-result{
+  width:100%;
+  height:100%;
+  background-color:#333;
+  border-radius:5px;
+  text-align:left;
+}
+
+#gen-result div{
+  color:#fe0;
+  padding:5px;
+  font-family:monospace;
+  font-weight:600;
+}
+
+#theme-gen-button{
+  background:none;
+  border:3px dotted #aaa;
+  border-bottom:3px solid #aaa;
+  border-top:none;
+  border-radius:0px 0 10px 10px;
+  cursor:pointer;
+  font-size:24px;
+  background-color:white;
+  position:relative;
+  top:-3px;
+  background:linear-gradient(to bottom, #fff, #f80);
+}
+
+#footer{
+  position:relative;
+  width:960px;
+  margin:auto;
+  top:70px;
+  color:#fff;
+  text-shadow:0 0 3px;
+}
+
+.hor-line{
+  width:90%;
+  height:10px;
+  margin-top:15px;
+  margin-left:5%;
+  border-top:2px dashed rgb(250,137,0);
+}
+
+.text-super-big{
+  font-size:55px;
+  font-family: 'Dosis', sans-serif;
+}
+
+.text-big{
+  font-size:28px;
+}
+
+.text-normal{
+  font-size:20px;
+}
+
+.normal-button{
+  font-size:20px;
+  background:none;
+  border:1px solid;
+  border-radius:3px;
+  cursor:pointer;
+  margin-top:15px;
+  background-color:white;
+}
+
+.normal-button:hover{
+  background-color:rgb(250,137,0);
+}
+
+.buttoned-checkbox{
+  font-size:20px;
+  background:none;
+  border:1px solid;
+  border-radius:3px;
+  cursor:pointer;
+  margin-top:15px;
+  padding:1px;
+}
+
+.buttoned-checkbox:hover{
+  background-color:rgb(250,137,0);
+}
+
+.buttoned-checkbox input{
+  display:none;
+}
+
+.buttoned-checkbox input:checked+label{
+  background-color:rgb(250,137,0);
+}</script>
+
+<script id="jsbin-source-javascript" type="text/javascript">$.extend({
+  selectAllGenres: function(){
+    $(".genre-select").prop("checked",true);
+  },
+  selectNoneGenres: function(){
+    $(".genre-select").removeAttr("checked");
+  },
+  selectAllResults: function(){
+    var firstLine = $('#gen-result div').text().split("\n");
+    console.log(firstLine[1]);
+  },
+  selectText: function() {
+    var doc = document, text = doc.getElementById("gen-result-text"), range, selection;    
+    if (doc.body.createTextRange) {
+        range = document.body.createTextRange();
+        range.moveToElementText(text);
+        range.select();
+    } else if (window.getSelection) {
+        selection = window.getSelection();        
+        range = document.createRange();
+        range.selectNodeContents(text);
+        selection.removeAllRanges();
+        selection.addRange(range);
+    }
+  },
+  generateGameTheme: function(){
+    var resultContainer = $("#gen-result-text");
+    var checkedArray = $("#site-content table input:checkbox:checked").map(function(){
+      return $(this).val();
+    }).get();
+    var checkMixGenres = $("#mix-genres").prop("checked");
+    var genre;
+    
+    if (checkedArray.length>0){
+      if (checkMixGenres){
+        genre = chooseRandomGenre(checkedArray)+", "+
+           chooseRandomGenre(checkedArray);
+      } else {
+        genre = chooseRandomGenre(checkedArray);
+      }
+      resultContainer.html(
+                          "Название:<br/>"+
+                          "Жанр: "+genre+"<br/>"+
+                          "<br/>"+
+                          "Особенности:<br/>"+
+                          "  - <br/>"+
+                          "  - <br/>"+
+                          "  - <br/>"+
+                          "<br/>"+
+                          "Недостатки:<br/>"+
+                          "  - <br/>"+
+                          "  - <br/>"+
+                          "  - <br/>"
+                          );
+    } else {
+      resultContainer.html("Ошибка: Вы ничего не выбрали!<br />Для корректной работы генератора нужно выбрать хотя бы один жанр");
+    }
+  }
+});
+
+function chooseRandomGenre(genreArray){
+  return genreArray[(Math.floor(Math.random() * genreArray.length))];
+}</script></body>
+</html>
